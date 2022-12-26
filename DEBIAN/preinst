@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Pre-install script for nxsearch from NextControl
+
+echo "Looking for old versions of NextControl..."
+
+if [ -d "/var/log/nxcontrol" ]; then
+    sudo rm -r /var/log/nxcontrol
+    echo "Removed old logs files from NextControl"
+fi
+
+if [ -d "/etc/nxcontrol" ]; then
+    sudo rm -r /etc/nxcontrol
+    echo "Removed old configuration files from NextControl"
+fi
+
+if [ -f "/bin/nxsearch" ]; then
+    sudo rm -f /bin/nxsearch
+    echo "Removed old NextControl from /bin..."
+fi
+
+if [ -f "/usr/bin/nxsearch" ]; then
+    sudo rm -f /usr/bin/nxsearch
+    echo "Removed old NextControl from /usr/bin..."
+fi
+
+if [ -f "/usr/local/bin/nxsearch" ]; then
+    sudo rm -f /usr/local/bin/nxsearch
+    echo "Removed old NextControl from /usr/local/bin..."
+fi
+
+exit 0;

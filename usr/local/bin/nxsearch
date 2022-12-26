@@ -1,0 +1,68 @@
+#!/bin/bash
+
+#
+# Script for get Nextcloud info for mass users disabled per UUID
+# Author: Eduardo Osquel Pérez Rivero
+# Date: 26-12-2022
+#
+
+# Get the nextcloud data directory from config file
+nextdata=$(cat /etc/nxcontrol/options.conf | grep nextcloud_data | awk -v FS='=' '{print $2}')
+
+# Get the nextcloud logs directory from config file
+logs_dir=$(cat /etc/nxcontrol/options.conf | grep logs_root | awk -v FS='=' '{print $2}')
+
+# Get the days before option from config file
+daysbefore=$(cat /etc/nxcontrol/options.conf | grep days_before | awk -v FS='=' '{print $2}')
+
+Help()
+{
+    # Display Help
+    echo "Description:"
+    echo "   Search for files hosted in the cloud"
+    echo
+    echo "Usage: nxsearch [ -option ]"
+    echo
+    echo "Options:"
+    echo "  -h          : Help"
+    echo "  -m          : File search .mp4"
+    echo "  -k          : File search .mkv"
+    echo "  -a          : File search .avi"
+    echo "  -r          : File search .rar"
+    echo "  -o          : Another file format"
+}
+
+Find()
+{
+    truncate -s 0 "$logs_dir"/auditlogs.log
+    echo "Searching files .$1"
+    find "$nextdata"/ -mtime -"$daysbefore" -name "*.$1" >> "$logs_dir"/auditlogs.log
+    cat "$logs_dir"/auditlogs.log
+}
+# Get the options
+while getopts ":hmkaro:" option; do
+    case $option in
+        h) # Display Help
+            Help
+            exit 0;;
+        m) # Find mp4
+            Find mp4
+            exit 0;;
+        k) # Find mkv
+            Find mkv
+            exit 0;;
+        a) # Find avi
+            Find avi
+            exit 0;;
+        r) # Find rar
+            Find rar
+            exit 0;;
+        o) # Enter new file format
+            namedial=$OPTARG
+            Find "$namedial"
+            exit 0;;
+        \?) # Invalid option
+            echo -e "Error: that's not a valid option"
+            exit 0;;
+    esac
+done

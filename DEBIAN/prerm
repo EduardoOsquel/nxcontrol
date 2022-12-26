@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -d "/var/log/nxcontrol" ]; then
+    sudo rm -r /var/log/nxcontrol
+    echo "Removed old logs files from NextControl"
+fi
+
+if [ -f "/bin/nxsearch" ]; then
+    sudo rm -f /bin/nxsearch
+    echo "Removed old NextControl from /bin..."
+fi
+
+if [ -f "/usr/bin/nxsearch" ]; then
+    sudo rm -f /usr/bin/nxsearch
+    echo "Removed binary from /usr/bin..."
+fi
+
+exit 0;

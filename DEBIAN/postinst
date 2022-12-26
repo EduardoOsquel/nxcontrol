@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Post-install script for nxsearch from NeXtControl
+
+echo "Configuring NextControl options..."
+
+# Set options files
+optn=/etc/nxcontrol/options.conf
+
+logs_dir=/var/log/nxcontrol
+mkdir $logs_dir
+touch $logs_dir/auditlogs.log
+
+# Get Nextcloud source code directory and write into configuration file
+nextcode=$(cat $optn | grep code | awk -v FS='=' '{print $2}')
+
+if [ -f $optn ]; then
+    # Get the Data directory
+    directory=$(cat $nextcode/config/config.php | grep datadirectory | awk -v FS="'" '{print $4}')
+
+    # Write inside options.conf
+    sed -i -e "s+nextcloud_data=.*+nextcloud_data=$directory+g" $optn
+fi
+
+
+# Function to add configuration to file 
+code=/var/www/nextcloud
+
+Add()
+{
+    # Write inside options.conf
+    sed -i -e "s+code=.*+code=$1+g" $optn
+    exit 0;
+}
+
+# Prompt
+echo 'By default, Nextcloud source code is defined as installed in /var/www/nextcloud'
+echo 'If you want to use another one, please edit the code entry in options.conf file'
+echo 'Check this setting before using any tools provided by this package'
+echo 'An incorrect configuration can cause the malfunction of the program'
+
+Add $code
