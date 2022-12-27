@@ -8,8 +8,8 @@ echo "Configuring NextControl options..."
 optn=/etc/nxcontrol/options.conf
 
 logs_dir=/var/log/nxcontrol
-mkdir $logs_dir
-touch $logs_dir/auditlogs.log
+mkdir "$logs_dir"
+touch "$logs_dir"/auditlogs.log
 
 # Get Nextcloud source code directory and write into configuration file
 nextcode=$(cat $optn | grep code | awk -v FS='=' '{print $2}')
