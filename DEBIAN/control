@@ -3,7 +3,7 @@ Package: nxcontrol
 Version: 1.0-1
 Architecture: amd64
 Section: web
-Depends: sudo, apache2, php (>= 7.0)
+Depends: sudo, apache2, php7.4
 Priority: optional
 Maintainer: Eduardo Osquel Perez Rivero <eduardoosquel@hotmail.com>
 Description: Software to search inside nextcloud data directory
