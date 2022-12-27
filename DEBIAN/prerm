@@ -6,17 +6,17 @@ if [ -d "/var/log/nxcontrol" ]; then
 fi
 
 if [ -f "/bin/nxsearch" ]; then
-    sudo rm -f /bin/nxsearch
+    sudo rm /bin/nxsearch
     echo "Removed binary from /bin..."
 fi
 
 if [ -f "/usr/bin/nxsearch" ]; then
-    sudo rm -f /usr/bin/nxsearch
+    sudo rm /usr/bin/nxsearch
     echo "Removed binary from /usr/bin..."
 fi
 
 if [ -f "/usr/local/bin/nxsearch" ]; then
-    sudo rm -f /usr/local/bin/nxsearch
+    sudo rm /usr/local/bin/nxsearch
     echo "Removed symlink from /usr/local/bin..."
 fi
 
