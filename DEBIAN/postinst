@@ -4,7 +4,7 @@
 
 echo "Configuring NextControl options..."
 
-# Set options files
+# Set config files
 optn=/etc/nxcontrol/options.conf
 
 logs_dir=/var/log/nxcontrol
@@ -22,9 +22,18 @@ if [ -f $optn ]; then
     sed -i -e "s+nextcloud_data=.*+nextcloud_data=$directory+g" $optn
 fi
 
-
 # Function to add configuration to file 
 code=/var/www/nextcloud
+
+Bin()
+{
+    if [ ! -d "/usr/local/bin" ]; then
+        mkdir /usr/local/bin
+        Bin
+    else
+        ln -s /etc/nxcontrol/nxsearch /usr/local/bin/nxsearch
+    fi
+}
 
 Add()
 {
@@ -39,4 +48,5 @@ echo 'If you want to use another one, please edit the code entry in options.conf
 echo 'Check this setting before using any tools provided by this package'
 echo 'An incorrect configuration can cause the malfunction of the program'
 
+Bin
 Add $code
