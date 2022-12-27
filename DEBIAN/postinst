@@ -29,6 +29,7 @@ Bin()
 {
     if [ ! -d "/usr/local/bin" ]; then
         mkdir /usr/local/bin
+        chmod 755 /usr/local/bin
         Bin
     else
         ln -s /etc/nxcontrol/nxsearch /usr/local/bin/nxsearch

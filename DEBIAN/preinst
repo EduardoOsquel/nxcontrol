@@ -26,7 +26,7 @@ fi
 
 if [ -f "/usr/local/bin/nxsearch" ]; then
     sudo rm -f /usr/local/bin/nxsearch
-    echo "Removed old NextControl from /usr/local/bin..."
+    echo "Removed old symlink from /usr/local/bin..."
 fi
 
 exit 0;
