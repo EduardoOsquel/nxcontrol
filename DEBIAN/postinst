@@ -32,7 +32,7 @@ Bin()
         chmod 755 /usr/local/bin
         Bin
     else
-        ln -s /etc/nxcontrol/nxsearch /usr/local/bin/nxsearch
+        ln -s /etc/nxcontrol/search.conf /usr/local/bin/nxsearch
     fi
 }
 
